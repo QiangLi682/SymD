@@ -1,0 +1,384 @@
+{
+  "tonic": "C",
+  "time_signature": "4/4",
+  "notes": [
+    {
+      "rest": false,
+      "note": "C4",
+      "interval": 0,
+      "staff_position": 12,
+      "duration": 1.0,
+      "offset": 0.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "C4",
+      "interval": 0,
+      "staff_position": 12,
+      "duration": 1.0,
+      "offset": 1.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "G4",
+      "interval": 7,
+      "staff_position": 5,
+      "duration": 1.0,
+      "offset": 2.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "G4",
+      "interval": 7,
+      "staff_position": 5,
+      "duration": 1.0,
+      "offset": 3.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "A4",
+      "interval": 9,
+      "staff_position": 3,
+      "duration": 1.0,
+      "offset": 4.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "A4",
+      "interval": 9,
+      "staff_position": 3,
+      "duration": 1.0,
+      "offset": 5.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "G4",
+      "interval": 7,
+      "staff_position": 5,
+      "duration": 2.0,
+      "offset": 6.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "F4",
+      "interval": 5,
+      "staff_position": 7,
+      "duration": 1.0,
+      "offset": 8.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "F4",
+      "interval": 5,
+      "staff_position": 7,
+      "duration": 1.0,
+      "offset": 9.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "E4",
+      "interval": 4,
+      "staff_position": 8,
+      "duration": 1.0,
+      "offset": 10.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "E4",
+      "interval": 4,
+      "staff_position": 8,
+      "duration": 1.0,
+      "offset": 11.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "D4",
+      "interval": 2,
+      "staff_position": 10,
+      "duration": 1.0,
+      "offset": 12.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "D4",
+      "interval": 2,
+      "staff_position": 10,
+      "duration": 1.0,
+      "offset": 13.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "C4",
+      "interval": 0,
+      "staff_position": 12,
+      "duration": 2.0,
+      "offset": 14.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "G4",
+      "interval": 7,
+      "staff_position": 5,
+      "duration": 1.0,
+      "offset": 16.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "G4",
+      "interval": 7,
+      "staff_position": 5,
+      "duration": 1.0,
+      "offset": 17.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "F4",
+      "interval": 5,
+      "staff_position": 7,
+      "duration": 1.0,
+      "offset": 18.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "F4",
+      "interval": 5,
+      "staff_position": 7,
+      "duration": 1.0,
+      "offset": 19.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "E4",
+      "interval": 4,
+      "staff_position": 8,
+      "duration": 1.0,
+      "offset": 20.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "E4",
+      "interval": 4,
+      "staff_position": 8,
+      "duration": 1.0,
+      "offset": 21.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "D4",
+      "interval": 2,
+      "staff_position": 10,
+      "duration": 2.0,
+      "offset": 22.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "G4",
+      "interval": 7,
+      "staff_position": 5,
+      "duration": 1.0,
+      "offset": 24.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "G4",
+      "interval": 7,
+      "staff_position": 5,
+      "duration": 1.0,
+      "offset": 25.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "F4",
+      "interval": 5,
+      "staff_position": 7,
+      "duration": 1.0,
+      "offset": 26.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "F4",
+      "interval": 5,
+      "staff_position": 7,
+      "duration": 1.0,
+      "offset": 27.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "E4",
+      "interval": 4,
+      "staff_position": 8,
+      "duration": 1.0,
+      "offset": 28.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "E4",
+      "interval": 4,
+      "staff_position": 8,
+      "duration": 1.0,
+      "offset": 29.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "D4",
+      "interval": 2,
+      "staff_position": 10,
+      "duration": 2.0,
+      "offset": 30.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "C4",
+      "interval": 0,
+      "staff_position": 12,
+      "duration": 1.0,
+      "offset": 32.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "C4",
+      "interval": 0,
+      "staff_position": 12,
+      "duration": 1.0,
+      "offset": 33.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "G4",
+      "interval": 7,
+      "staff_position": 5,
+      "duration": 1.0,
+      "offset": 34.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "G4",
+      "interval": 7,
+      "staff_position": 5,
+      "duration": 1.0,
+      "offset": 35.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "A4",
+      "interval": 9,
+      "staff_position": 3,
+      "duration": 1.0,
+      "offset": 36.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "A4",
+      "interval": 9,
+      "staff_position": 3,
+      "duration": 1.0,
+      "offset": 37.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "G4",
+      "interval": 7,
+      "staff_position": 5,
+      "duration": 2.0,
+      "offset": 38.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "F4",
+      "interval": 5,
+      "staff_position": 7,
+      "duration": 1.0,
+      "offset": 40.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "F4",
+      "interval": 5,
+      "staff_position": 7,
+      "duration": 1.0,
+      "offset": 41.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "E4",
+      "interval": 4,
+      "staff_position": 8,
+      "duration": 1.0,
+      "offset": 42.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "E4",
+      "interval": 4,
+      "staff_position": 8,
+      "duration": 1.0,
+      "offset": 43.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "D4",
+      "interval": 2,
+      "staff_position": 10,
+      "duration": 1.0,
+      "offset": 44.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "D4",
+      "interval": 2,
+      "staff_position": 10,
+      "duration": 1.0,
+      "offset": 45.0,
+      "voice": 0
+    },
+    {
+      "rest": false,
+      "note": "C4",
+      "interval": 0,
+      "staff_position": 12,
+      "duration": 2.0,
+      "offset": 46.0,
+      "voice": 0
+    }
+  ]
+}

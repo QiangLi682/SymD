@@ -123,7 +123,10 @@ symd/
 │   │   ├── xml_parser.py    # MusicXML → NoteList via music21
 │   │   └── audio_parser.py  # MP3/WAV → NoteList via basic-pitch
 │   └── tests/
-│       └── test_engine.py   # Unit tests for every interval mapping
+│       ├── test_p1_m1.py    # Phase 1 / M1: core conversion engine
+│       ├── test_p2_m2.py    # Phase 2 / M2: ABC parser
+│       ├── test_p2_m4.py    # Phase 2 / M4: MusicXML parser
+│       └── test_p2_m6.py    # Phase 2 / M6: audio transcription
 ├── frontend/
 │   ├── src/
 │   │   ├── App.jsx
@@ -160,9 +163,9 @@ Update status as you go. Claude Code reads this to know where to pick up.
 
 | ID | Phase | Milestone | Status | Notes |
 |---|---|---|---|---|
-| M1 | 1 — Engine | Hardcoded notes → SymD intervals printed to console | `[ ] not started` | |
-| M2 | 2 — Parsers | ABC file parsed with music21, outputs SymD interval list | `[ ] not started` | |
-| M3 | 3 — Renderer | SymD staff drawn in browser from interval JSON | `[ ] not started` | |
+| M1 | 1 — Engine | Hardcoded notes → SymD intervals printed to console | `[x] done` | 15/15 tests pass; F#/Gb enharmonic equivalence confirmed |
+| M2 | 2 — Parsers | ABC file parsed with music21, outputs SymD interval list | `[x] done` | 15/15 tests pass; handles notes, chords, rests, auto key detection |
+| M3 | 3 — Renderer | SymD staff drawn in browser from interval JSON | `[x] done` | SVG staff, asymmetric spacing, mediant shading, tritone bold center line, color-coded notes |
 | M4 | 2 — Parsers | MusicXML input added via music21 | `[ ] not started` | |
 | M5 | 4 — UI | File upload, key selector, SVG/PDF export working | `[ ] not started` | |
 | M6 | 2 — Parsers | MP3/WAV transcription via basic-pitch with review step | `[ ] not started` | |
@@ -244,7 +247,8 @@ Interval hover tooltips, harmonic region highlighting, side-by-side comparison, 
 - **SVG positions from constants:** Define `STAFF_LINE_Y` and `INTERVAL_Y_OFFSET` as constants — never hardcode pixel positions inline.
 - **Backend returns NoteList, not SVG:** Frontend owns all rendering. Backend returns structured JSON only.
 - **Key detection is always overridable:** Never silently apply auto-detected key — surface it in the UI with a visible override control.
-- **Install:** `pip install music21` for backend. `npm create vite@latest frontend -- --template react` for frontend.
+- **Install:** `py -m pip install music21` for backend. `npm create vite@latest frontend -- --template react` for frontend.
+- **Python command:** Use `py` not `python` — `python` is not on PATH on this machine. Tests: `py tests/test_p1_m1.py`. Demo: `py demo.py` (run from `backend/`).
 
 ---
 
