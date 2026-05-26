@@ -51,13 +51,13 @@ def test_staff_position_range():
         assert 1 <= pos <= 12, f"interval {i} → position {pos} out of range"
 
 def test_tritone_is_center():
-    assert interval_to_staff_position(6) == 6
+    assert interval_to_staff_position(6) == 7
 
-def test_tonic_is_top():
-    assert interval_to_staff_position(0) == 12
+def test_tonic_is_bottom():
+    assert interval_to_staff_position(0) == 1
 
-def test_leading_tone_is_second():
-    assert interval_to_staff_position(11) == 1
+def test_leading_tone_is_top():
+    assert interval_to_staff_position(11) == 12
 
 def test_staff_positions_are_unique():
     positions = [interval_to_staff_position(i) for i in range(12)]

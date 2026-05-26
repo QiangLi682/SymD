@@ -39,6 +39,7 @@ function App() {
       clearInterval(intervalRef.current);
       setPlaying(false);
       setCurrentBeat(null);
+      if (scrollRef.current) scrollRef.current.scrollLeft = 0;
     }, (totalSec + 0.5) * 1000);
   };
 
@@ -48,6 +49,7 @@ function App() {
     clearInterval(intervalRef.current);
     setPlaying(false);
     setCurrentBeat(null);
+    if (scrollRef.current) scrollRef.current.scrollLeft = 0;
   };
 
   return (
