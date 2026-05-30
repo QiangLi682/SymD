@@ -1,34 +1,37 @@
-import { useState, useRef, useEffect } from 'react';
-import SymDStaff, { BEAT_W, MARGIN_X } from './components/SymDStaff';
+import { useState, useRef } from 'react';
+import SymDStaff from './components/SymDStaff';
 import { playSymD } from './playback';
 import twinkle from './data/twinkle_symd.json';
+import bach   from './data/bach_bwv133_symd.json';
+
+const SONGS = [
+  { id: 'twinkle', label: 'Twinkle Twinkle', data: twinkle },
+  { id: 'bach',    label: 'Bach BWV 133.6',  data: bach   },
+];
 
 function App() {
-  const [playing, setPlaying]       = useState(false);
-  const [bpm, setBpm]               = useState(120);
+  const [songId, setSongId]           = useState('twinkle');
+  const [playing, setPlaying]         = useState(false);
+  const [bpm, setBpm]                 = useState(120);
   const [currentBeat, setCurrentBeat] = useState(null);
+  const [clefTonic, setClefTonic]     = useState('D');
   const stopRef     = useRef(null);
   const timerRef    = useRef(null);
   const intervalRef = useRef(null);
-  const scrollRef   = useRef(null);
 
-  // Auto-scroll to keep the active note centred in the container
-  useEffect(() => {
-    if (currentBeat === null || !scrollRef.current) return;
-    const noteX = MARGIN_X + currentBeat * BEAT_W;
-    const container = scrollRef.current;
-    container.scrollLeft = Math.max(0, noteX - container.clientWidth / 2);
-  }, [currentBeat]);
+  const song      = SONGS.find(s => s.id === songId);
+  const noteCount = song.data.notes.filter(n => !n.rest).length;
 
-  const noteCount = twinkle.notes.filter(n => !n.rest).length;
+  const handleSelectSong = (id) => {
+    if (playing) handleStop();
+    setSongId(id);
+  };
 
   const handlePlay = async () => {
-    const { stop, totalSec } = await playSymD(twinkle.notes, twinkle.tonic, bpm);
+    const { stop, totalSec } = await playSymD(song.data.notes, song.data.tonic, bpm);
     stopRef.current = stop;
     setPlaying(true);
 
-    // Track playback position in quarter-note beats.
-    // Add 50 ms offset to match the Tone.js scheduling delay in playback.js.
     const secPerBeat = 60 / bpm;
     const startMs = Date.now() + 50;
     intervalRef.current = setInterval(() => {
@@ -39,7 +42,6 @@ function App() {
       clearInterval(intervalRef.current);
       setPlaying(false);
       setCurrentBeat(null);
-      if (scrollRef.current) scrollRef.current.scrollLeft = 0;
     }, (totalSec + 0.5) * 1000);
   };
 
@@ -49,17 +51,33 @@ function App() {
     clearInterval(intervalRef.current);
     setPlaying(false);
     setCurrentBeat(null);
-    if (scrollRef.current) scrollRef.current.scrollLeft = 0;
   };
 
   return (
     <div style={{ padding: 32, fontFamily: 'sans-serif', background: '#f7f6f1', minHeight: '100vh' }}>
-      <h1 style={{ fontSize: 24, marginBottom: 4 }}>SymD Staff Renderer — M3 Demo</h1>
+      <h1 style={{ fontSize: 24, marginBottom: 4 }}>SymD Staff Renderer</h1>
+
+      {/* Song selector */}
+      <div style={{ display: 'flex', gap: 8, marginBottom: 16, alignItems: 'center' }}>
+        <span style={{ fontSize: 13, color: '#555', marginRight: 4 }}>Song:</span>
+        {SONGS.map(s => (
+          <button key={s.id} onClick={() => handleSelectSong(s.id)} style={{
+            padding: '5px 16px', fontSize: 13, cursor: 'pointer', borderRadius: 6,
+            border: '1px solid #ccc',
+            background: songId === s.id ? '#1a1a2e' : '#fff',
+            color:      songId === s.id ? 'white'   : '#444',
+            fontWeight: songId === s.id ? 'bold'    : 'normal',
+          }}>
+            {s.label}
+          </button>
+        ))}
+      </div>
+
       <p style={{ color: '#666', marginBottom: 20, fontSize: 14 }}>
-        Tonic: <strong>{twinkle.tonic}</strong> &nbsp;|&nbsp;
-        Meter: <strong>{twinkle.time_signature}</strong> &nbsp;|&nbsp;
+        {song.data.title && <><strong>{song.data.title}</strong> &nbsp;|&nbsp;</>}
+        Tonic: <strong>{song.data.tonic}</strong> &nbsp;|&nbsp;
+        Meter: <strong>{song.data.time_signature}</strong> &nbsp;|&nbsp;
         Notes: <strong>{noteCount}</strong>
-        &nbsp;(Twinkle Twinkle — ABC to SymD)
       </p>
 
       {/* Playback controls */}
@@ -85,10 +103,27 @@ function App() {
         {playing && (
           <span style={{ fontSize: 13, color: '#2d5be3' }}>Playing...</span>
         )}
+        <label style={{ fontSize: 13, color: '#555', display: 'flex', alignItems: 'center', gap: 8, marginLeft: 16 }}>
+          Clef reference:
+          {['D', 'C'].map(t => (
+            <button key={t} onClick={() => setClefTonic(t)} style={{
+              padding: '4px 14px', fontSize: 12, cursor: 'pointer', borderRadius: 4,
+              border: '1px solid #ccc',
+              background: clefTonic === t ? '#1a1a2e' : '#fff',
+              color: clefTonic === t ? 'white' : '#555',
+              fontWeight: clefTonic === t ? 'bold' : 'normal',
+            }}>{t}</button>
+          ))}
+        </label>
       </div>
 
-      <div ref={scrollRef} style={{ overflowX: 'auto', paddingBottom: 16 }}>
-        <SymDStaff notes={twinkle.notes} tonic={twinkle.tonic} currentBeat={currentBeat} />
+      <div style={{ paddingBottom: 16 }}>
+        <SymDStaff
+          notes={song.data.notes}
+          tonic={song.data.tonic}
+          currentBeat={currentBeat}
+          clefTonic={clefTonic}
+        />
       </div>
 
       <div style={{ marginTop: 32, fontSize: 13, color: '#555' }}>
