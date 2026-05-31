@@ -31,6 +31,14 @@ function buildLayout() {
   return { L1, L2, L3, L4, L5 };
 }
 
+// Y for axis KEY RECTANGLES only — interval 0 sits just below interval 1,
+// interval 12 (octave tonic) sits just above interval 11. Note dot positions unchanged.
+function axisKeyY(interval, layout) {
+  if (interval === 0)  return intervalToY(1, layout) + 13;   // adjacent below D#
+  if (interval === 12) return intervalToY(11, layout) - 13;  // adjacent above C#
+  return intervalToY(interval, layout);
+}
+
 function intervalToY(interval, layout) {
   const { L1, L2, L3, L4, L5 } = layout;
   return {
@@ -89,42 +97,43 @@ export default function SymDStaff({ notes = [], tonic = 'C', currentBeat = null,
         <rect x={0} y={L5} width={AXIS_W} height={OUTER_SPACE} fill="#e8eeff" opacity={0.6} />
         <rect x={0} y={L2} width={AXIS_W} height={OUTER_SPACE} fill="#e8eeff" opacity={0.6} />
 
-        {Array.from({ length: 12 }, (_, i) => {
-          const y      = intervalToY(i, layout);
-          const black  = isBlack[i];
-          const onLine = [1,4,6,8,11].includes(i);
-          // Highlight mismatch: a line that is NOT a black key (only happens with non-D clef)
+        {/* Render intervals 0–11 plus interval 12 (octave tonic) */}
+        {[...Array.from({ length: 12 }, (_, i) => i), 12].map(i => {
+          const isOctave = i === 12;
+          const idx      = isOctave ? 0 : i;          // clefNames index
+          const y        = axisKeyY(i, layout);
+          const black    = isBlack[idx];
+          const onLine   = [1,4,6,8,11].includes(i);
           const mismatch = onLine && !black;
+          const label    = clefNames[idx] + (isOctave ? "'" : '');
+          const isTonic  = i === 0 || isOctave;
           return (
             <g key={i}>
-              {/* Piano key rectangle */}
               <rect x={6} y={y - 6} width={14} height={12}
                 fill={black ? '#1a1a2e' : '#ffffff'}
-                stroke={mismatch ? '#c94f1e' : '#888'}
-                strokeWidth={mismatch ? 1.5 : 0.8} rx={1}
+                stroke={mismatch ? '#c94f1e' : isTonic ? '#c94f1e' : '#888'}
+                strokeWidth={mismatch || isTonic ? 1.5 : 0.8} rx={1}
               />
-              {/* Note name */}
               <text x={26} y={y + 4}
                 textAnchor="start" fontSize={10} fontFamily="monospace"
-                fill={mismatch ? '#c94f1e' : black ? '#1a1a2e' : '#555'}
-                fontWeight={black || mismatch ? 'bold' : 'normal'}
+                fill={mismatch ? '#c94f1e' : isTonic ? '#c94f1e' : black ? '#1a1a2e' : '#555'}
+                fontWeight={black || mismatch || isTonic ? 'bold' : 'normal'}
               >
-                {clefNames[i]}
+                {label}
               </text>
-              {/* Interval number */}
               <text x={AXIS_W - 6} y={y + 4}
                 textAnchor="end" fontSize={10} fontFamily="monospace"
-                fill={i === 6 ? '#1a1a2e' : '#aaa'}
-                fontWeight={i === 6 ? 'bold' : 'normal'}
+                fill={i === 6 ? '#1a1a2e' : isTonic ? '#c94f1e' : '#aaa'}
+                fontWeight={i === 6 || isTonic ? 'bold' : 'normal'}
               >
-                {i}
+                {isOctave ? "0'" : i}
               </text>
             </g>
           );
         })}
 
-        {/* Clef label below tonic */}
-        <text x={6} y={intervalToY(0, layout) + 18}
+        {/* Clef label — sits below the D key (interval 0) */}
+        <text x={6} y={axisKeyY(0, layout) + 16}
           fontSize={8} fontFamily="monospace" fill="#c94f1e"
         >
           {clefTonic} clef
