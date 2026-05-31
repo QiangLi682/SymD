@@ -59,7 +59,16 @@ def parse_abc(source: str, tonic: str = None) -> dict:
 
     notes.sort(key=lambda n: n["offset"])
 
+    # Extract title from ABC metadata (T: field) if present
+    title = ""
+    try:
+        if score.metadata and score.metadata.title:
+            title = score.metadata.title
+    except Exception:
+        pass
+
     return {
+        "title": title,
         "tonic": tonic,
         "time_signature": time_sig,
         "notes": notes,

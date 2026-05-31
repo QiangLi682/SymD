@@ -5,4 +5,10 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/SymD/',
+  server: {
+    proxy: {
+      // Forward /api/* from the Vite dev server → FastAPI on port 8000
+      '/api': 'http://localhost:8000',
+    },
+  },
 })

@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "PowerShell(python3 --version 2>&1)",
-      "PowerShell(py --version 2>&1)"
+      "PowerShell(py --version 2>&1)",
+      "Bash(py -c \"from music21 import corpus; paths = corpus.getComposer\\('bach'\\); print\\('\\\\n'.join\\(str\\(p\\) for p in paths[:20]\\)\\)\")",
+      "Bash(py -c ' *)",
+      "Bash(npm run *)",
+      "Bash(py -m pip install fastapi \"uvicorn[standard]\" python-multipart)",
+      "Bash(py -m pip install oemer)",
+      "Bash(py -c \"import oemer.ete; print\\(dir\\(oemer.ete\\)\\)\")",
+      "Bash(py -c \"import inspect; from oemer.ete import main, get_parser; print\\(inspect.signature\\(main\\)\\); p = get_parser\\(\\); p.print_help\\(\\)\")",
+      "Bash(py -c \"import oemer; import os; print\\(os.path.dirname\\(oemer.__file__\\)\\)\")",
+      "Bash(py -c \"import sys; print\\(sys.executable\\)\")"
     ]
   }
 }
