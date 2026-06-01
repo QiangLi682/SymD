@@ -42,7 +42,7 @@ function axisKeyY(interval, layout) {
 function intervalToY(interval, layout) {
   const { L1, L2, L3, L4, L5 } = layout;
   return {
-    0:  L1 + LEDGER_SPACE,
+    0:  L1 + 13,
     1:  L1,
     2:  L2 + OUTER_SPACE * 2 / 3,
     3:  L2 + OUTER_SPACE / 3,
@@ -71,7 +71,7 @@ export default function SymDStaff({ notes = [], tonic = 'C', currentBeat = null,
 
   const layout = buildLayout();
   const { L1, L2, L3, L4, L5 } = layout;
-  const svgHeight = L1 + LEDGER_SPACE + MARGIN_Y;
+  const svgHeight = L1 + MARGIN_Y;
 
   const noteX = offset => STAFF_PAD + offset * BEAT_W;
 

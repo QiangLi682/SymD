@@ -178,11 +178,12 @@ function App() {
         border: '1px solid #ddd', background: '#fff', maxWidth: 520,
       }}>
         <h2 style={{ fontSize: 15, margin: '0 0 12px', color: '#1a1a2e' }}>
-          Upload Sheet Music Image
+          Upload Sheet Music
         </h2>
         <p style={{ fontSize: 12, color: '#888', marginBottom: 14, lineHeight: 1.5 }}>
-          <strong>Image</strong> (PNG, JPG) — OMR reads printed sheet music locally, ~20–40 sec.<br/>
-          <strong>MusicXML</strong> (.xml, .mxl), <strong>MIDI</strong> (.mid), or <strong>ABC</strong> (.abc) — parsed instantly.
+          <strong>MusicXML</strong> (.xml, .mxl) — export from MuseScore, Finale, Sibelius<br/>
+          <strong>MIDI</strong> (.mid) — from any DAW or music software<br/>
+          <strong>ABC</strong> (.abc) — plain text notation
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -191,7 +192,7 @@ function App() {
             <input
               ref={fileInputRef}
               type="file"
-              accept="image/*,.xml,.mxl,.musicxml,.mid,.midi,.abc"
+              accept=".xml,.mxl,.musicxml,.mid,.midi,.abc"
               onChange={e => setUploadFile(e.target.files[0] || null)}
               style={{ fontSize: 13, flex: 1 }}
             />
@@ -240,7 +241,7 @@ function App() {
           )}
           {uploadStatus === 'loading' && (
             <p style={{ fontSize: 12, color: '#2d5be3', margin: 0 }}>
-              Processing... MusicXML/MIDI finishes in seconds; images may take 20–40 seconds.
+              Parsing... usually done in 1–2 seconds.
             </p>
           )}
         </div>

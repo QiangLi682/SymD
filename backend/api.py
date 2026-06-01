@@ -11,9 +11,8 @@ sys.path.insert(0, os.path.dirname(__file__))
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
-from parsers.image_parser import parse_image
-from parsers.score_parser  import parse_score
-from parsers.abc_parser    import parse_abc
+from parsers.score_parser import parse_score
+from parsers.abc_parser   import parse_abc
 
 app = FastAPI(title="SymD API")
 
@@ -25,7 +24,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tiff", ".webp"}
 SCORE_EXTS = {".xml", ".mxl", ".musicxml", ".mid", ".midi"}
 ABC_EXTS   = {".abc"}
 
@@ -56,7 +54,7 @@ async def upload(
 
     try:
         if suffix in ABC_EXTS:
-            import tempfile, os, shutil
+            import tempfile, shutil
             tmp = tempfile.mkdtemp()
             try:
                 p = os.path.join(tmp, filename)
@@ -69,13 +67,11 @@ async def upload(
                 shutil.rmtree(tmp, ignore_errors=True)
         elif suffix in SCORE_EXTS:
             result = parse_score(file_bytes, filename, tonic=tonic_arg)
-        elif suffix in IMAGE_EXTS:
-            result = parse_image(file_bytes, filename, tonic=tonic_arg)
         else:
-            all_exts = sorted(IMAGE_EXTS | SCORE_EXTS | ABC_EXTS)
+            accepted = sorted(SCORE_EXTS | ABC_EXTS)
             raise HTTPException(
                 status_code=400,
-                detail=f"Unsupported file type '{suffix}'. Accepted: {', '.join(all_exts)}",
+                detail=f"Unsupported file type '{suffix}'. Accepted: {', '.join(accepted)}",
             )
         return result
     except HTTPException:

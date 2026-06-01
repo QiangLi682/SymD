@@ -11,7 +11,10 @@
       "Bash(py -c \"import oemer.ete; print\\(dir\\(oemer.ete\\)\\)\")",
       "Bash(py -c \"import inspect; from oemer.ete import main, get_parser; print\\(inspect.signature\\(main\\)\\); p = get_parser\\(\\); p.print_help\\(\\)\")",
       "Bash(py -c \"import oemer; import os; print\\(os.path.dirname\\(oemer.__file__\\)\\)\")",
-      "Bash(py -c \"import sys; print\\(sys.executable\\)\")"
+      "Bash(py -c \"import sys; print\\(sys.executable\\)\")",
+      "Bash(py test_omr.py)",
+      "Bash(py -c \"import oemer.ete; import inspect; print\\(inspect.getsource\\(oemer.ete\\)\\)\")",
+      "Bash(dir *.xml *.mxl)"
     ]
   }
 }
